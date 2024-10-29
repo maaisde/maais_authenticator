@@ -3,3 +3,10 @@ __pycache__/
 graphics/logo.pptx
 /misc/
 /docs/_build/
+streamlit_authenticator/models/authentication_model.py
+streamlit_authenticator/models/oauth2/microsoft_model.py
+streamlit_authenticator.egg-info/dependency_links.txt
+streamlit_authenticator.egg-info/PKG-INFO
+streamlit_authenticator.egg-info/requires.txt
+streamlit_authenticator.egg-info/SOURCES.txt
+streamlit_authenticator.egg-info/top_level.txt
