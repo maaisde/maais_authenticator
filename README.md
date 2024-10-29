@@ -55,7 +55,7 @@ import streamlit_authenticator as stauth
 * Enter a name, random key, and number of days to expiry, for a re-authentication cookie that will be stored on the client's browser to enable password-less re-authentication. If you do not require re-authentication, you may set the number of days to expiry to 0.
 * Define an optional list of pre-authorized emails of users who are allowed to register and add their credentials to the config file using the **register_user** widget.
 * Add the optional configuration parameters for OAuth2 if you wish to use the **experimental_guest_login** button.
-* **_Please remember to update the config file (as shown in step 13) after you use the reset_password, register_user, forgot_password, or update_user_details widgets._**
+* **_Please remember to update the config file (as shown in step 13) whenever the contents are modified or after using any of the widgets or buttons._**
 
 ```python
 cookie:
@@ -160,7 +160,7 @@ authenticator = stauth.Authenticate(
 ```python
 try:
     authenticator.login()
-except LoginError as e:
+except Exception as e:
     st.error(e)
 ```
 
@@ -188,6 +188,7 @@ except LoginError as e:
 ![](https://github.com/mkhorasani/Streamlit-Authenticator/blob/main/graphics/login_form.JPG)
 
 * **_Please remember to re-invoke an 'unrendered' login widget on each and every page in a multi-page application._**
+* **_Please remember to update the config file (as shown in step 13) after you use this widget._**
 
 ### 6. Creating a guest login button
 
@@ -204,7 +205,7 @@ try:
     authenticator.experimental_guest_login('Login with Microsoft',
                                            provider='microsoft',
                                            oauth2=config['oauth2'])
-except LoginError as e:
+except Exception as e:
     st.error(e)
 ```
 
@@ -318,7 +319,7 @@ if st.session_state['authentication_status']:
 try:
     email_of_registered_user, \
     username_of_registered_user, \
-    name_of_registered_user = authenticator.register_user(pre_authorized=config['pre-authorized'])
+    name_of_registered_user = authenticator.register_user(pre_authorized=config['pre-authorized']['emails'])
     if email_of_registered_user:
         st.success('User registered successfully')
 except Exception as e:
@@ -483,7 +484,7 @@ if st.session_state['authentication_status']:
 
 ### 13. Updating the config file
 
-* Please ensure that the config file is re-saved anytime the credentials are updated or whenever the **experimental_guest_login**, **reset_password**, **register_user**, **forgot_password**, or **update_user_details** widgets are used.
+* Please ensure that the config file is re-saved whenever the contents are modified or after using any of the widgets or buttons.
 
 ```python
 with open('../config.yaml', 'w') as file:
