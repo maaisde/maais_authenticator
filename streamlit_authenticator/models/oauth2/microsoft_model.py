@@ -136,7 +136,6 @@ class MicrosoftModel:
             if 'access_token' not in token_json:
                 print('No access token received')
                 st.rerun()
-            
             decoded_token = self.decode_jwt(token_json['access_token'])
             keys = {'email', 'family_name', 'given_name'}
             user_info_combined = {key: decoded_token[key] for key in keys if key in decoded_token}

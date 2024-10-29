@@ -308,7 +308,7 @@ class AuthenticationModel:
             st.session_state['authentication_status'] = True
             st.session_state['name'] = f'{result.get("given_name", "")} ' \
                 f'{result.get("family_name", "")}'
-            
+          
             if provider.lower() == 'microsoft':
                 if 'aadobjectid' in result:
                     st.session_state['aadobjectid'] = result.get('aadobjectid')
@@ -321,7 +321,7 @@ class AuthenticationModel:
                     applications = result.get('applications')
                     st.session_state['applications'] = applications
                     self.credentials['usernames'][result['email']]['applications'] = applications
-
+                  
             st.session_state['email'] = result['email']
             st.session_state['username'] = result['email']
             st.session_state['roles'] = roles
