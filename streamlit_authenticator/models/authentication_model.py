@@ -54,7 +54,8 @@ class AuthenticationModel:
             self.credentials['usernames'] = {
                 key.lower(): value
                 for key, value in self.credentials['usernames'].items()
-                }
+                if key is not None
+            }
             if auto_hash:
                 if len(self.credentials['usernames']) > params.AUTO_HASH_MAX_USERS:
                     print(f"""Auto hashing in progress. To avoid runtime delays, please manually
