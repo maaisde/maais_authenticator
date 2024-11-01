@@ -147,13 +147,11 @@ class MicrosoftModel:
             }
             user_info_r = requests.get(user_info_url, headers=user_info_headers, timeout=10)
             user_info = user_info_r.json()
-            print(f"User info: {user_info}")
             
             # Fetch user's AD groups
             user_groups_url = "https://graph.microsoft.com/v1.0/me/memberOf"
             user_groups_r = requests.get(user_groups_url, headers=user_info_headers, timeout=10)
             user_groups = user_groups_r.json()
-            print(f"User groups: {user_groups}")
             
             # Extract group memberships
             groups = [
@@ -166,7 +164,6 @@ class MicrosoftModel:
             user_apps_url = "https://graph.microsoft.com/v1.0/me/appRoleAssignments"
             user_apps_r = requests.get(user_apps_url, headers=user_info_headers, timeout=10)
             user_apps = user_apps_r.json()
-            print(f"User apps: {user_apps}")
             
             # Extract application assignments
             applications = [
