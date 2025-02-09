@@ -15,6 +15,7 @@ streamlit_authenticator/models/__init__.py
 streamlit_authenticator/models/authentication_model.py
 streamlit_authenticator/models/cookie_model.py
 streamlit_authenticator/models/oauth2/__init__.py
+streamlit_authenticator/models/oauth2/auth0_model.py
 streamlit_authenticator/models/oauth2/google_model.py
 streamlit_authenticator/models/oauth2/microsoft_model.py
 streamlit_authenticator/utilities/__init__.py

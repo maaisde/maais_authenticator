@@ -13,6 +13,7 @@ import streamlit as st
 
 from ..models.oauth2 import GoogleModel
 from ..models.oauth2 import MicrosoftModel
+from ..models.oauth2 import Auth0Model
 from .. import params
 from ..utilities import (Hasher,
                          Helpers,
@@ -285,11 +286,16 @@ class AuthenticationModel:
         elif provider.lower() == 'microsoft':
             microsoft_model = MicrosoftModel(oauth2[provider])
             result = microsoft_model.guest_login()
+        elif provider.lower() == 'auth0':  
+            auth0_model = Auth0Model(oauth2[provider])  
+            result = auth0_model.guest_login()  
+            print(f"result: {result}")
         if isinstance(result, dict):
             if isinstance(max_concurrent_users, int) and self._count_concurrent_users() > \
                 max_concurrent_users - 1:
                 st.query_params.clear()
                 raise LoginError('Maximum number of concurrent users exceeded')
+            print(f"result2: {result}")
             if 'email' not in result:
                 raise LoginError('Email not found in authentication result')
             if result['email'] not in self.credentials['usernames']:
@@ -300,7 +306,8 @@ class AuthenticationModel:
             
             self.credentials['usernames'][result['email']] = \
                 {'email': result['email'],
-                 'logged_in': True, 'first_name': result.get('given_name', ''),
+                 'logged_in': True, 
+                 'first_name': result.get('given_name', ''),
                  'last_name': result.get('family_name', ''),
                  'picture': result.get('picture', None),
                  'roles': roles}
@@ -322,6 +329,10 @@ class AuthenticationModel:
                     applications = result.get('applications')
                     st.session_state['applications'] = applications
                     self.credentials['usernames'][result['email']]['applications'] = applications
+            if provider.lower() == 'auth0':
+                if 'sub' in result:
+                    st.session_state['sub'] = result.get('sub')
+                    self.credentials['usernames'][result['email']]['sub'] = result.get('sub')
                   
             st.session_state['email'] = result['email']
             st.session_state['username'] = result['email']
