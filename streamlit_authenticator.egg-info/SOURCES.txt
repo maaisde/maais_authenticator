@@ -14,11 +14,14 @@ streamlit_authenticator/controllers/cookie_controller.py
 streamlit_authenticator/models/__init__.py
 streamlit_authenticator/models/authentication_model.py
 streamlit_authenticator/models/cookie_model.py
+streamlit_authenticator/models/cloud/__init__.py
+streamlit_authenticator/models/cloud/cloud_model.py
 streamlit_authenticator/models/oauth2/__init__.py
 streamlit_authenticator/models/oauth2/auth0_model.py
 streamlit_authenticator/models/oauth2/google_model.py
 streamlit_authenticator/models/oauth2/microsoft_model.py
 streamlit_authenticator/utilities/__init__.py
+streamlit_authenticator/utilities/encryptor.py
 streamlit_authenticator/utilities/exceptions.py
 streamlit_authenticator/utilities/hasher.py
 streamlit_authenticator/utilities/helpers.py
